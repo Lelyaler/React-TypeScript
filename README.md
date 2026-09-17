@@ -1,5 +1,7 @@
 # GameVault
 
+> **Live Demo:** [https://lelyaler.github.io/React-TypeScript/](https://lelyaler.github.io/React-TypeScript/)
+
 Веб-приложение для каталогизации и трекинга видеоигр (бэклог) в стилистике интерфейса PlayStation 5.
 
 Работает как со встроенным демо-каталогом (с трейлерами и скриншотами), так и с полным API RAWG (более 500 000 игр).
