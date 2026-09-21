@@ -43,6 +43,7 @@ export const PS5GameShelf: React.FC<Props> = ({
 
   return (
     <div className="relative group/shelf mt-auto pt-2 sm:pt-4 pb-4 sm:pb-8">
+      <h2 className="sr-only">Полка игр</h2>
       <button
         type="button"
         onClick={() => scroll('left')}
@@ -89,7 +90,10 @@ export const PS5GameShelf: React.FC<Props> = ({
               <img
                 src={game.background_image || FALLBACK_IMAGE}
                 alt={game.name}
+                width={176}
+                height={235}
                 loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   e.currentTarget.src = FALLBACK_IMAGE;
                 }}

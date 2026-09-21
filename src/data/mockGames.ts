@@ -1,53 +1,57 @@
 import type { Game, Genre } from "../types/game";
 
+const BASE = (typeof import.meta !== "undefined" && import.meta.env?.BASE_URL)
+  ? (import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`)
+  : "/";
+
 export const MOCK_GENRES: Genre[] = [
   {
     "id": 4,
     "name": "Action",
     "slug": "action",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/elden-ring.webp`
   },
   {
     "id": 5,
     "name": "RPG",
     "slug": "role-playing-games-rpg",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/the-witcher-3-wild-hunt.webp`
   },
   {
     "id": 3,
     "name": "Adventure",
     "slug": "adventure",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1593500/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/god-of-war.webp`
   },
   {
     "id": 2,
     "name": "Shooter",
     "slug": "shooter",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/counter-strike-2.webp`
   },
   {
     "id": 7,
     "name": "Puzzle",
     "slug": "puzzle",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/620/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/portal-2.webp`
   },
   {
     "id": 1,
     "name": "Racing",
     "slug": "racing",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/forza-horizon-5.webp`
   },
   {
     "id": 10,
     "name": "Strategy",
     "slug": "strategy",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/289070/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/baldurs-gate-3.webp`
   },
   {
     "id": 51,
     "name": "Indie",
     "slug": "indie",
-    "image_background": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/capsule_616x353.jpg"
+    "image_background": `${BASE}images/capsules/hollow-knight.webp`
   }
 ];
 
@@ -58,7 +62,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "the-witcher-3-wild-hunt",
     "name": "The Witcher 3: Wild Hunt",
     "released": "2015-05-18",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/the-witcher-3-wild-hunt.webp`,
     "rating": 4.65,
     "rating_top": 5,
     "metacritic": 92,
@@ -135,7 +139,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "cyberpunk-2077",
     "name": "Cyberpunk 2077",
     "released": "2020-12-10",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/cyberpunk-2077.webp`,
     "rating": 4.25,
     "rating_top": 5,
     "metacritic": 86,
@@ -205,7 +209,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "grand-theft-auto-v",
     "name": "Grand Theft Auto V",
     "released": "2013-09-17",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/grand-theft-auto-v.webp`,
     "rating": 4.47,
     "rating_top": 5,
     "metacritic": 96,
@@ -275,7 +279,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "elden-ring",
     "name": "Elden Ring",
     "released": "2022-02-25",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/elden-ring.webp`,
     "rating": 4.72,
     "rating_top": 5,
     "metacritic": 96,
@@ -345,7 +349,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "baldurs-gate-3",
     "name": "Baldur's Gate 3",
     "released": "2023-08-03",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/baldurs-gate-3.webp`,
     "rating": 4.88,
     "rating_top": 5,
     "metacritic": 96,
@@ -415,7 +419,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "red-dead-redemption-2",
     "name": "Red Dead Redemption 2",
     "released": "2018-10-26",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/red-dead-redemption-2.webp`,
     "rating": 4.75,
     "rating_top": 5,
     "metacritic": 97,
@@ -485,7 +489,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "portal-2",
     "name": "Portal 2",
     "released": "2011-04-18",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/620/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/portal-2.webp`,
     "rating": 4.61,
     "rating_top": 5,
     "metacritic": 95,
@@ -555,7 +559,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "god-of-war",
     "name": "God of War",
     "released": "2018-04-20",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1593500/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/god-of-war.webp`,
     "rating": 4.68,
     "rating_top": 5,
     "metacritic": 94,
@@ -618,7 +622,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "counter-strike-2",
     "name": "Counter-Strike 2",
     "released": "2023-09-27",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/counter-strike-2.webp`,
     "rating": 4.12,
     "rating_top": 5,
     "metacritic": 82,
@@ -674,7 +678,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "hollow-knight",
     "name": "Hollow Knight",
     "released": "2017-02-24",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/hollow-knight.webp`,
     "rating": 4.71,
     "rating_top": 5,
     "metacritic": 90,
@@ -756,7 +760,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "hades",
     "name": "Hades",
     "released": "2020-09-17",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/hades.webp`,
     "rating": 4.69,
     "rating_top": 5,
     "metacritic": 93,
@@ -838,7 +842,7 @@ export const MOCK_GAMES: Game[] = [
     "slug": "forza-horizon-5",
     "name": "Forza Horizon 5",
     "released": "2021-11-09",
-    "background_image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/capsule_616x353.jpg",
+    "background_image": `${BASE}images/capsules/forza-horizon-5.webp`,
     "rating": 4.45,
     "rating_top": 5,
     "metacritic": 92,

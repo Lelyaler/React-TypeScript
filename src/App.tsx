@@ -273,6 +273,7 @@ function App() {
               onExportJson={handleExportJson}
             />
 
+            <h2 className="sr-only">Избранные игры</h2>
             {displayedGames.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4.5">
                 {displayedGames.map((game) => (
@@ -416,6 +417,7 @@ function App() {
               />
             ) : (
               <div className="py-3 sm:py-6">
+                <h2 className="sr-only">Каталог игр</h2>
                 {isLoading ? (
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4.5">
                     {Array.from({ length: 6 }).map((_, i) => (

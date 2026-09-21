@@ -63,7 +63,10 @@ export const GameCard: React.FC<Props> = ({
         <img
           src={images[activeImageIndex] || FALLBACK_IMAGE}
           alt={game.name}
+          width={300}
+          height={172}
           loading="lazy"
+          decoding="async"
           onError={(e) => {
             e.currentTarget.src = FALLBACK_IMAGE;
           }}
