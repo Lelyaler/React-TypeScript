@@ -1,6 +1,6 @@
 import React from 'react';
 import type { BacklogStatus } from '../types/game';
-import { Play, Clock, Check, Layers, Timer, Share2, Download } from 'lucide-react';
+import { Play, Clock, Check, Layers, Timer, Share2, Download, Upload } from 'lucide-react';
 import { sounds } from '../utils/soundEffects';
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
   onSelectTab: (tab: BacklogStatus | 'all') => void;
   onShareLibrary?: () => void;
   onExportJson?: () => void;
+  onImportJson?: (file: File) => void;
 }
 
 export const LibraryDashboard: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const LibraryDashboard: React.FC<Props> = ({
   onSelectTab,
   onShareLibrary,
   onExportJson,
+  onImportJson,
 }) => {
   return (
     <div className="space-y-5 mb-8">
@@ -63,6 +65,27 @@ export const LibraryDashboard: React.FC<Props> = ({
             <Download className="w-3.5 h-3.5" />
             <span>Экспорт JSON</span>
           </button>
+
+          <label
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 rounded-lg text-xs font-medium bg-white/[0.05] hover:bg-white/10 text-zinc-300 hover:text-white transition-colors cursor-pointer"
+            title="Импортировать список из JSON файла"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            <span>Импорт</span>
+            <input
+              type="file"
+              accept=".json"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  sounds.playSelect();
+                  onImportJson?.(file);
+                  e.target.value = '';
+                }
+              }}
+            />
+          </label>
         </div>
       </div>
 

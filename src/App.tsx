@@ -56,7 +56,7 @@ function App() {
 
   const { games, error, isLoading } = useGames(gameQuery);
   const { genres } = useGenres();
-  const { entries, updateStatus, updateRating, getStatus, getRating, stats } = useBacklog();
+  const { entries, updateStatus, updateRating, getStatus, getRating, importEntries, stats } = useBacklog();
 
   const selectedGame = useMemo(() => {
     if (selectedGameManual) return selectedGameManual;
@@ -213,11 +213,24 @@ function App() {
   });
 
   const handleShareLibrary = () => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      setToastMessage('Ссылка скопирована в буфер обмена!');
-      setTimeout(() => setToastMessage(null), 3000);
-    });
+    const currentUrl = window.location.origin + window.location.pathname + '#library';
+    if (navigator.share) {
+      navigator.share({
+        title: 'GameVault Library',
+        text: `Моя игровая коллекция в GameVault: ${stats.total} игр (${stats.playing} играю, ${stats.completed} пройдено).`,
+        url: currentUrl,
+      }).catch(() => {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+          setToastMessage('Ссылка на библиотеку скопирована в буфер обмена!');
+          setTimeout(() => setToastMessage(null), 3000);
+        });
+      });
+    } else {
+      navigator.clipboard.writeText(currentUrl).then(() => {
+        setToastMessage('Ссылка на библиотеку скопирована в буфер обмена!');
+        setTimeout(() => setToastMessage(null), 3000);
+      });
+    }
   };
 
   const handleExportJson = () => {
@@ -231,6 +244,26 @@ function App() {
     URL.revokeObjectURL(url);
     setToastMessage('Файл бэклога успешно экспортирован!');
     setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  const handleImportJson = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const text = e.target?.result as string;
+        const parsed = JSON.parse(text);
+        const count = importEntries(parsed);
+        if (count > 0) {
+          setToastMessage(`Успешно импортировано ${count} игр в библиотеку!`);
+        } else {
+          setToastMessage('Файл не содержит корректных записей бэклога.');
+        }
+      } catch {
+        setToastMessage('Ошибка при чтении JSON файла.');
+      }
+      setTimeout(() => setToastMessage(null), 3000);
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -271,6 +304,7 @@ function App() {
               onSelectTab={setActiveBacklogTab}
               onShareLibrary={handleShareLibrary}
               onExportJson={handleExportJson}
+              onImportJson={handleImportJson}
             />
 
             <h2 className="sr-only">Избранные игры</h2>

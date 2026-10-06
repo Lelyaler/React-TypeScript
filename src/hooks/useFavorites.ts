@@ -85,8 +85,21 @@ export const useBacklog = () => {
     return entry?.userRating;
   };
 
-  const stats = calculateBacklogStats(entries);
+  const importEntries = (imported: BacklogEntry[]): number => {
+    if (!Array.isArray(imported)) return 0;
+    const valid = imported.filter((item) => item?.game?.id && item?.status);
+    if (valid.length === 0) return 0;
 
+    setEntries((prev) => {
+      const map = new Map<number, BacklogEntry>();
+      prev.forEach((e) => map.set(e.game.id, e));
+      valid.forEach((e) => map.set(e.game.id, e));
+      return Array.from(map.values());
+    });
+    return valid.length;
+  };
+
+  const stats = calculateBacklogStats(entries);
 
   return {
     entries,
@@ -94,6 +107,7 @@ export const useBacklog = () => {
     updateRating,
     getStatus,
     getRating,
+    importEntries,
     stats,
   };
 };
