@@ -52,7 +52,7 @@ export const PS5Spotlight: React.FC<Props> = ({
 
       <p className="text-xs sm:text-sm md:text-base text-zinc-300/90 mt-2.5 sm:mt-4 leading-relaxed line-clamp-2 sm:line-clamp-3 font-normal max-w-2xl drop-shadow">
         {game.description_raw ||
-          `${game.name} — захватывающее приключение с проработанным миром и динамичным геймплеем.`}
+          (game.genres?.length ? `${game.name} — игра в жанре ${game.genres.map((g) => g.name).join(', ')}.` : game.name)}
       </p>
 
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 mt-4 sm:mt-6">
@@ -65,7 +65,7 @@ export const PS5Spotlight: React.FC<Props> = ({
           <span>Подробнее об игре</span>
         </button>
 
-        <div className="inline-flex items-center justify-between sm:justify-start gap-1 p-1 rounded-xl bg-black/50 backdrop-blur-md border border-white/10">
+        <div className="inline-flex items-center justify-between sm:justify-start gap-1 p-1 rounded-xl bg-zinc-900/90 backdrop-blur-md shadow-lg shadow-black/40">
           <button
             type="button"
             onClick={() => onUpdateStatus(game, userStatus === 'playing' ? null : 'playing')}

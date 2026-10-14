@@ -32,7 +32,7 @@ export const FilterChips: React.FC<Props> = ({ activeChip, onSelectChip }) => {
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
               isActive
                 ? 'bg-white text-zinc-950 font-semibold shadow-sm'
-                : 'bg-white/[0.05] hover:bg-white/[0.08] text-zinc-400 hover:text-zinc-200'
+                : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300'
             }`}
           >
             {chip.icon}

@@ -68,7 +68,7 @@ export const GameDetailsModal: React.FC<Props> = ({
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6 lg:p-8 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="absolute inset-0" onClick={handleClose} />
 
-      <div className="relative w-full max-w-5xl bg-zinc-900 border-t sm:border border-white/10 rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10 h-[94vh] sm:h-auto sm:max-h-[92vh] flex flex-col">
+      <div className="relative w-full max-w-5xl bg-zinc-950 sm:bg-zinc-900 rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10 h-[94vh] sm:h-auto sm:max-h-[92vh] flex flex-col">
         <div className="sm:hidden w-12 h-1 rounded-full bg-white/20 mx-auto my-2 shrink-0" />
 
         {activeTab !== 'trailer' && (
@@ -78,7 +78,7 @@ export const GameDetailsModal: React.FC<Props> = ({
               sounds.playSelect();
               setActivePreviewImage(game.background_image || MODAL_FALLBACK_IMAGE);
             }}
-            className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/90 text-zinc-300 hover:text-white text-xs font-medium backdrop-blur-md border border-white/10 transition-all hover:scale-105 shadow-lg"
+            className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-medium backdrop-blur-md transition-all hover:scale-105 shadow-md"
             title="Открыть постер целиком без обрезки"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -89,7 +89,7 @@ export const GameDetailsModal: React.FC<Props> = ({
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 p-2 rounded-full bg-black/60 hover:bg-black/90 text-zinc-300 hover:text-white backdrop-blur-md transition-all hover:scale-105 shadow-lg border border-white/10"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 p-2 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white backdrop-blur-md transition-all hover:scale-105 shadow-md"
           title="Закрыть (Esc)"
         >
           <X className="w-5 h-5" />
@@ -121,12 +121,12 @@ export const GameDetailsModal: React.FC<Props> = ({
                   <PlatformIcons platforms={game.parent_platforms} />
                   <CriticScore score={game.metacritic} />
                   {releaseYear && (
-                    <span className="text-[11px] sm:text-xs font-mono font-medium px-2 sm:px-2.5 py-0.5 rounded-full bg-black/50 text-zinc-300 backdrop-blur-md border border-white/10">
+                    <span className="text-[11px] sm:text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-zinc-850/80 text-zinc-300 backdrop-blur-md">
                       {releaseYear}
                     </span>
                   )}
                   {game.genres?.[0] && (
-                    <span className="text-[11px] sm:text-xs font-medium px-2 sm:px-2.5 py-0.5 rounded-full bg-white/15 text-white backdrop-blur-md">
+                    <span className="text-[11px] sm:text-xs font-medium px-2.5 py-0.5 rounded-full bg-white/15 text-white backdrop-blur-md">
                       {game.genres[0].name}
                     </span>
                   )}
@@ -140,7 +140,7 @@ export const GameDetailsModal: React.FC<Props> = ({
         )}
 
         {activeTab === 'trailer' && (
-          <div className="px-4 sm:px-6 pt-4 sm:pt-5 pb-3 flex items-center justify-between border-b border-white/[0.06] bg-zinc-950/90 shrink-0 pr-14 sm:pr-16">
+          <div className="px-4 sm:px-6 pt-4 sm:pt-5 pb-3 flex items-center justify-between border-b border-zinc-800 bg-zinc-950/90 shrink-0 pr-14 sm:pr-16">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                 <PlatformIcons platforms={game.parent_platforms} />
@@ -150,7 +150,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                     {releaseYear}
                   </span>
                 )}
-                <span className="text-xs text-amber-400 font-semibold px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20">
+                <span className="text-xs text-amber-400 font-semibold px-2.5 py-0.5 rounded-full bg-amber-400/15">
                   Трейлер
                 </span>
               </div>
@@ -161,7 +161,7 @@ export const GameDetailsModal: React.FC<Props> = ({
           </div>
         )}
 
-        <div className="flex items-center gap-1 sm:gap-2 border-b border-white/[0.08] px-4 sm:px-6 pt-2 bg-zinc-900/95 overflow-x-auto no-scrollbar shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 border-b border-zinc-800/80 px-4 sm:px-6 pt-2 bg-zinc-900/95 overflow-x-auto no-scrollbar shrink-0">
           <button
             type="button"
             onClick={() => {
@@ -239,7 +239,7 @@ export const GameDetailsModal: React.FC<Props> = ({
           {activeTab === 'overview' && (
             <div className="space-y-5">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center gap-3">
+                <div className="p-3.5 rounded-xl bg-zinc-800/50 flex items-center gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0">
                     <Calendar className="w-4 h-4" />
                   </div>
@@ -251,7 +251,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center gap-3">
+                <div className="p-3.5 rounded-xl bg-zinc-800/50 flex items-center gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
                     <Award className="w-4 h-4" />
                   </div>
@@ -263,7 +263,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center gap-3">
+                <div className="p-3.5 rounded-xl bg-zinc-800/50 flex items-center gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
                     <Star className="w-4 h-4 fill-amber-400" />
                   </div>
@@ -275,7 +275,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center gap-3">
+                <div className="p-3.5 rounded-xl bg-zinc-800/50 flex items-center gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center shrink-0">
                     <Timer className="w-4 h-4" />
                   </div>
@@ -288,7 +288,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl bg-zinc-800/40 shadow-sm">
                 <div className="w-full sm:w-auto">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400 block mb-1.5">
                     Статус в вашей библиотеке
@@ -380,7 +380,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                   </h4>
                   <p className="text-sm text-zinc-300 leading-relaxed font-normal whitespace-pre-line">
                     {game.description_raw ||
-                      `${game.name} — одна из самых ярких и увлекательных игр в своем жанре. Погрузитесь в захватывающую вселенную с детально проработанным миром, глубокими игровыми механиками и кинематографичной атмосферой.`}
+                      (game.genres?.length ? `${game.name} — проект в жанре ${game.genres.map((g) => g.name).join(', ')}.` : 'Подробная информация об игре доступна в каталоге.')}
                   </p>
                 </div>
 
@@ -393,7 +393,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                       {game.genres.map((genre) => (
                         <span
                           key={genre.id}
-                          className="bg-white/[0.05] hover:bg-white/[0.08] text-zinc-300 text-xs px-3 py-1.5 rounded-lg border border-white/[0.06] transition-colors"
+                          className="bg-zinc-800 hover:bg-zinc-700/80 text-zinc-200 text-xs px-3 py-1.5 rounded-lg transition-colors shadow-sm"
                         >
                           {genre.name}
                         </span>
@@ -409,7 +409,7 @@ export const GameDetailsModal: React.FC<Props> = ({
             <div className="w-full flex-1 flex flex-col items-center justify-center">
               {game.trailer_url ? (
                 <div
-                  className="relative w-full aspect-video mx-auto rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/15 ring-1 ring-white/5"
+                  className="relative w-full aspect-video mx-auto rounded-2xl overflow-hidden bg-black shadow-2xl"
                   style={{
                     maxHeight: 'calc(88vh - 200px)',
                     maxWidth: 'calc((88vh - 200px) * 16 / 9)',
@@ -424,7 +424,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                   />
                 </div>
               ) : (
-                <div className="py-20 text-center text-zinc-400 bg-white/[0.02] rounded-2xl border border-white/[0.06] space-y-3 max-w-md w-full mx-auto">
+                <div className="py-20 text-center text-zinc-400 bg-zinc-800/30 rounded-2xl space-y-3 max-w-md w-full mx-auto">
                   <Film className="w-10 h-10 text-zinc-600 mx-auto" />
                   <p className="text-base font-semibold text-zinc-200">Официальный видеоролик пока не добавлен</p>
                   <p className="text-xs text-zinc-500 max-w-sm mx-auto">
@@ -445,7 +445,7 @@ export const GameDetailsModal: React.FC<Props> = ({
                       sounds.playSelect();
                       setActivePreviewImage(s.image);
                     }}
-                    className="aspect-video rounded-xl overflow-hidden bg-zinc-950 cursor-pointer group relative border border-white/5 hover:border-white/25 transition-all shadow-md"
+                    className="aspect-video rounded-xl overflow-hidden bg-zinc-950 cursor-pointer group relative shadow-md hover:shadow-xl transition-all"
                   >
                     <img
                       src={s.image}
@@ -466,7 +466,7 @@ export const GameDetailsModal: React.FC<Props> = ({
           {activeTab === 'specs' && game.pc_requirements && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               {game.pc_requirements.minimum && (
-                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] space-y-2.5">
+                <div className="p-5 rounded-2xl bg-zinc-800/40 space-y-2.5 shadow-sm">
                   <h4 className="font-bold text-zinc-200 text-sm flex items-center gap-2">
                     <Monitor className="w-4 h-4 text-zinc-400" />
                     <span>Минимальные требования</span>
@@ -478,7 +478,7 @@ export const GameDetailsModal: React.FC<Props> = ({
               )}
 
               {game.pc_requirements.recommended && (
-                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] space-y-2.5">
+                <div className="p-5 rounded-2xl bg-zinc-800/40 space-y-2.5 shadow-sm">
                   <h4 className="font-bold text-zinc-200 text-sm flex items-center gap-2">
                     <Monitor className="w-4 h-4 text-emerald-400" />
                     <span>Рекомендуемые требования</span>
@@ -499,7 +499,7 @@ export const GameDetailsModal: React.FC<Props> = ({
           onClick={() => setActivePreviewImage(null)}
         >
           <div
-            className="relative max-w-5xl max-h-[95vh] sm:max-h-[92vh] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950 shadow-2xl border border-white/20 flex items-center justify-center"
+            className="relative max-w-5xl max-h-[95vh] sm:max-h-[92vh] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950 shadow-2xl flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <img
@@ -510,7 +510,7 @@ export const GameDetailsModal: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => setActivePreviewImage(null)}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 bg-black/70 hover:bg-black text-white rounded-full transition-all border border-white/20 shadow-lg hover:scale-105"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 bg-zinc-900/90 hover:bg-zinc-800 text-white rounded-full transition-all shadow-lg hover:scale-105"
               title="Закрыть просмотр (Esc)"
             >
               <X className="w-5 h-5" />

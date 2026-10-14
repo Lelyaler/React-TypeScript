@@ -11,7 +11,7 @@ export const Toast: React.FC<Props> = ({ message, type = 'success', onClose }) =
   if (!message) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-white shadow-2xl animate-fadeIn text-xs sm:text-sm font-medium">
+    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-xl bg-zinc-900 text-white shadow-2xl shadow-black/80 animate-fadeIn text-xs sm:text-sm font-medium">
       {type === 'success' ? (
         <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
       ) : (

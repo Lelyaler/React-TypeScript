@@ -351,7 +351,7 @@ function App() {
               />
             )}
 
-            <div className="flex items-center justify-between gap-2 sm:gap-3 pt-3 sm:pt-6 pb-2 border-t border-white/10">
+            <div className="flex items-center justify-between gap-2 sm:gap-3 pt-3 sm:pt-6 pb-2">
               <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1 flex-1">
                 <button
                   type="button"
@@ -361,8 +361,8 @@ function App() {
                   }}
                   className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                     gameQuery.genreId === null
-                      ? 'bg-white text-zinc-950 shadow-sm'
-                      : 'bg-white/5 hover:bg-white/10 text-zinc-300'
+                      ? 'bg-white text-zinc-950 font-bold shadow-sm'
+                      : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 shadow-sm'
                   }`}
                 >
                   Все жанры
@@ -381,15 +381,15 @@ function App() {
                     }}
                     className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                       gameQuery.genreId === genre.id
-                        ? 'bg-white text-zinc-950 shadow-sm'
-                        : 'bg-white/5 hover:bg-white/10 text-zinc-300'
+                        ? 'bg-white text-zinc-950 font-bold shadow-sm'
+                        : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 shadow-sm'
                     }`}
                   >
                     {genre.name}
                   </button>
                 ))}
 
-                <div className="h-4 w-px bg-white/15 shrink-0" />
+                <div className="h-4 w-px bg-zinc-800 shrink-0" />
 
                 <FilterChips
                   activeChip={gameQuery.filterChip || 'all'}
@@ -400,7 +400,7 @@ function App() {
                 />
               </div>
 
-              <div className="hidden lg:flex items-center gap-1 bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/10 shrink-0">
+              <div className="hidden lg:flex items-center gap-1 bg-zinc-900/90 backdrop-blur-md p-1 rounded-xl shadow-inner shrink-0">
                 <button
                   type="button"
                   onClick={() => {
@@ -409,7 +409,7 @@ function App() {
                   }}
                   className={`p-1.5 rounded-lg transition-colors ${
                     effectiveViewMode === 'console'
-                      ? 'bg-white text-black'
+                      ? 'bg-white text-black font-semibold shadow-sm'
                       : 'text-zinc-400 hover:text-white'
                   }`}
                   title="Консольная полка (PS5 Dock)"
@@ -424,7 +424,7 @@ function App() {
                   }}
                   className={`p-1.5 rounded-lg transition-colors ${
                     effectiveViewMode === 'grid'
-                      ? 'bg-white text-black'
+                      ? 'bg-white text-black font-semibold shadow-sm'
                       : 'text-zinc-400 hover:text-white'
                   }`}
                   title="Сетка игр"
@@ -435,7 +435,7 @@ function App() {
             </div>
 
             {error && (
-              <div className="my-3 p-3 rounded-xl bg-rose-950/40 border border-rose-900/50 text-rose-300 text-xs flex items-center gap-2">
+              <div className="my-3 p-3.5 rounded-xl bg-rose-950/60 text-rose-300 text-xs flex items-center gap-2 shadow-sm">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -505,18 +505,18 @@ function App() {
       />
 
       {isGamepadConnected && (
-        <div className="fixed bottom-4 right-4 z-40 hidden md:flex items-center gap-3 px-4 py-2 rounded-full bg-zinc-950/85 backdrop-blur-md border border-white/10 text-xs text-zinc-300 shadow-2xl animate-fadeIn select-none">
+        <div className="fixed bottom-4 right-4 z-40 hidden md:flex items-center gap-3 px-4 py-2 rounded-full bg-zinc-900/95 backdrop-blur-md text-xs text-zinc-300 shadow-2xl shadow-black/80 animate-fadeIn select-none">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-semibold text-white">{gamepadName || 'Контроллер'}</span>
           </div>
-          <div className="h-3 w-px bg-white/15" />
+          <div className="h-3 w-px bg-zinc-800" />
           <div className="flex items-center gap-2.5 text-[11px] font-mono text-zinc-400">
-            <span><kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white font-sans font-semibold">◀ ▶</kbd> Выбор</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-white/10 text-emerald-300 font-sans font-semibold">A / ✕</kbd> Открыть</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-white/10 text-rose-300 font-sans font-semibold">B / ○</kbd> Назад</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-white/10 text-sky-300 font-sans font-semibold">X / □</kbd> Статус</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-white/10 text-amber-300 font-sans font-semibold">Y / △</kbd> Рулетка</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-white font-sans font-semibold">◀ ▶</kbd> Выбор</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-emerald-300 font-sans font-semibold">A / ✕</kbd> Открыть</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-rose-300 font-sans font-semibold">B / ○</kbd> Назад</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-sky-300 font-sans font-semibold">X / □</kbd> Статус</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-amber-300 font-sans font-semibold">Y / △</kbd> Рулетка</span>
           </div>
         </div>
       )}

@@ -34,7 +34,7 @@ export const ApiKeyModal: React.FC<Props> = ({ isOpen, onClose, onKeySaved }) =>
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm">
       <div className="absolute inset-0" onClick={onClose} />
 
-      <div className="relative w-full max-w-sm bg-zinc-900 border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl z-10 space-y-4">
+      <div className="relative w-full max-w-sm bg-zinc-900 rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black z-10 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-semibold text-white">Ключ RAWG API</h3>
           <button
@@ -66,7 +66,7 @@ export const ApiKeyModal: React.FC<Props> = ({ isOpen, onClose, onKeySaved }) =>
             value={currentKey}
             onChange={(e) => setCurrentKey(e.target.value)}
             placeholder="Вставьте API-ключ..."
-            className="w-full bg-zinc-950 border border-white/10 focus:border-white/30 rounded-lg px-3 py-2 text-xs text-zinc-100 placeholder-zinc-600 outline-none transition-colors"
+            className="w-full bg-zinc-950 focus:ring-1 focus:ring-white/30 rounded-lg px-3.5 py-2.5 text-xs text-zinc-100 placeholder-zinc-500 outline-none shadow-inner transition-colors"
           />
         </div>
 

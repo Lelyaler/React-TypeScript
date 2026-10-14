@@ -133,7 +133,7 @@ export const PS5Header: React.FC<Props> = ({
       <div className="flex items-center gap-1 sm:gap-3">
         {isGamepadConnected && (
           <div
-            className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium tracking-tight animate-fadeIn"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/70 text-emerald-300 text-xs font-medium tracking-tight shadow-sm animate-fadeIn"
             title={`Контроллер активен: ${gamepadName || 'Геймпад'}`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -150,7 +150,7 @@ export const PS5Header: React.FC<Props> = ({
             value={searchText}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Поиск..."
-            className="w-24 focus:w-36 sm:w-60 sm:focus:w-60 bg-black/40 hover:bg-black/60 focus:bg-black/80 border border-white/10 focus:border-white/40 text-xs sm:text-sm text-white placeholder-zinc-400 rounded-full pl-8 sm:pl-9 pr-7 sm:pr-8 py-1.5 transition-all duration-300 outline-none backdrop-blur-md"
+            className="w-28 focus:w-40 sm:w-64 sm:focus:w-64 bg-zinc-900/90 hover:bg-zinc-800/90 focus:bg-zinc-900 text-xs sm:text-sm text-white placeholder-zinc-400 rounded-full pl-8 sm:pl-9 pr-7 sm:pr-8 py-1.5 shadow-inner transition-all duration-200 outline-none focus:ring-1 focus:ring-white/20"
           />
           {searchText && (
             <button
@@ -177,7 +177,7 @@ export const PS5Header: React.FC<Props> = ({
         </button>
 
         {time && (
-          <div className="hidden sm:block text-xs font-mono font-semibold text-zinc-300 bg-white/5 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/5">
+          <div className="hidden sm:block text-xs font-mono font-semibold text-zinc-400 px-2.5 py-1">
             {time}
           </div>
         )}

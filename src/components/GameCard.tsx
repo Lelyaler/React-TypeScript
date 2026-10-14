@@ -118,7 +118,7 @@ export const GameCard: React.FC<Props> = ({
           {showStatusMenu && (
             <div
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-9 w-40 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl p-1 z-30 space-y-0.5 animate-fadeIn text-xs"
+              className="absolute right-0 top-9 w-40 bg-zinc-900 rounded-xl shadow-[0_12px_32px_rgba(0,0,0,0.85)] p-1 z-30 space-y-0.5 animate-fadeIn text-xs"
             >
               <button
                 type="button"
@@ -163,7 +163,7 @@ export const GameCard: React.FC<Props> = ({
               </button>
 
               {userStatus && (
-                <div className="pt-1 mt-1 border-t border-white/10">
+                <div className="pt-1 mt-1 border-t border-zinc-800">
                   <button
                     type="button"
                     onClick={() => {

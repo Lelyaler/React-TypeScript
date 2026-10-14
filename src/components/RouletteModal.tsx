@@ -65,7 +65,7 @@ export const RouletteModal: React.FC<Props> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="absolute inset-0" onClick={isSpinning ? undefined : handleClose} />
 
-      <div className="relative w-full max-w-md bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-10 flex flex-col p-4 sm:p-6 text-center">
+      <div className="relative w-full max-w-md bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl shadow-black z-10 flex flex-col p-4 sm:p-6 text-center">
         {!isSpinning && (
           <button
             type="button"
