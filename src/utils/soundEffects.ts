@@ -50,19 +50,24 @@ class SoundEngine {
     try {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(450, this.ctx.currentTime);
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.04);
+      osc.frequency.setValueAtTime(160, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(70, this.ctx.currentTime + 0.035);
 
-      gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.035);
 
-      osc.connect(gain);
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(this.ctx.destination);
 
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.04);
+      osc.stop(this.ctx.currentTime + 0.035);
     } catch {}
   }
 
@@ -74,19 +79,24 @@ class SoundEngine {
     try {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
 
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(440, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.08);
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(600, this.ctx.currentTime);
 
-      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(220, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(110, this.ctx.currentTime + 0.05);
 
-      osc.connect(gain);
+      gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.05);
+
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(this.ctx.destination);
 
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.08);
+      osc.stop(this.ctx.currentTime + 0.05);
     } catch {}
   }
 
@@ -98,19 +108,24 @@ class SoundEngine {
     try {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(350, this.ctx.currentTime);
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(600, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(250, this.ctx.currentTime + 0.06);
+      osc.frequency.setValueAtTime(130, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, this.ctx.currentTime + 0.04);
 
-      gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06);
+      gain.gain.setValueAtTime(0.035, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.04);
 
-      osc.connect(gain);
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(this.ctx.destination);
 
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.06);
+      osc.stop(this.ctx.currentTime + 0.04);
     } catch {}
   }
 
@@ -124,11 +139,11 @@ class SoundEngine {
       const gain = this.ctx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(1200, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(500, this.ctx.currentTime + 0.02);
+      osc.frequency.setValueAtTime(280, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(140, this.ctx.currentTime + 0.02);
 
-      gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.02);
+      gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.02);
 
       osc.connect(gain);
       gain.connect(this.ctx.destination);
@@ -144,23 +159,28 @@ class SoundEngine {
     if (!this.ctx) return;
 
     try {
-      const notes = [523.25, 659.25, 783.99, 1046.5];
-      notes.forEach((freq, idx) => {
-        const startTime = this.ctx!.currentTime + idx * 0.07;
+      const chords = [261.63, 392.0];
+      chords.forEach((freq, idx) => {
+        const startTime = this.ctx!.currentTime + idx * 0.06;
         const osc = this.ctx!.createOscillator();
         const gain = this.ctx!.createGain();
+        const filter = this.ctx!.createBiquadFilter();
 
-        osc.type = 'triangle';
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(500, startTime);
+
+        osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, startTime);
 
-        gain.gain.setValueAtTime(0.07, startTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+        gain.gain.setValueAtTime(0.035, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.2);
 
-        osc.connect(gain);
+        osc.connect(filter);
+        filter.connect(gain);
         gain.connect(this.ctx!.destination);
 
         osc.start(startTime);
-        osc.stop(startTime + 0.25);
+        osc.stop(startTime + 0.2);
       });
     } catch {}
   }

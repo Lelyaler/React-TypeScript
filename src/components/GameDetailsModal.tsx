@@ -78,7 +78,7 @@ export const GameDetailsModal: React.FC<Props> = ({
               sounds.playSelect();
               setActivePreviewImage(game.background_image || MODAL_FALLBACK_IMAGE);
             }}
-            className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-medium backdrop-blur-md transition-all hover:scale-105 shadow-md"
+            className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-semibold transition-all hover:scale-103 shadow-md"
             title="Открыть постер целиком без обрезки"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -89,7 +89,7 @@ export const GameDetailsModal: React.FC<Props> = ({
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 p-2 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white backdrop-blur-md transition-all hover:scale-105 shadow-md"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 p-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-all hover:scale-103 shadow-md"
           title="Закрыть (Esc)"
         >
           <X className="w-5 h-5" />
@@ -121,12 +121,12 @@ export const GameDetailsModal: React.FC<Props> = ({
                   <PlatformIcons platforms={game.parent_platforms} />
                   <CriticScore score={game.metacritic} />
                   {releaseYear && (
-                    <span className="text-[11px] sm:text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-zinc-850/80 text-zinc-300 backdrop-blur-md">
+                    <span className="text-[11px] sm:text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-zinc-850 text-zinc-300 shadow-sm">
                       {releaseYear}
                     </span>
                   )}
                   {game.genres?.[0] && (
-                    <span className="text-[11px] sm:text-xs font-medium px-2.5 py-0.5 rounded-full bg-white/15 text-white backdrop-blur-md">
+                    <span className="text-[11px] sm:text-xs font-medium px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-200 shadow-sm">
                       {game.genres[0].name}
                     </span>
                   )}
@@ -510,7 +510,7 @@ export const GameDetailsModal: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => setActivePreviewImage(null)}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 bg-zinc-900/90 hover:bg-zinc-800 text-white rounded-full transition-all shadow-lg hover:scale-105"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 bg-zinc-900/90 hover:bg-zinc-800 text-white rounded-xl transition-all shadow-lg hover:scale-105"
               title="Закрыть просмотр (Esc)"
             >
               <X className="w-5 h-5" />

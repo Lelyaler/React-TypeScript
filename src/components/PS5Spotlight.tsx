@@ -27,7 +27,7 @@ export const PS5Spotlight: React.FC<Props> = ({
         <CriticScore score={game.metacritic} />
 
         {game.rating > 0 && (
-          <span className="flex items-center gap-1 text-xs font-semibold text-amber-400 bg-black/40 backdrop-blur-md px-2 py-0.5 rounded-md">
+          <span className="flex items-center gap-1 text-xs font-semibold text-amber-400 bg-zinc-900 px-2 py-0.5 rounded-md shadow-sm">
             <Star className="w-3 h-3 fill-amber-400" />
             <span>{game.rating.toFixed(1)}</span>
           </span>
@@ -65,14 +65,14 @@ export const PS5Spotlight: React.FC<Props> = ({
           <span>Подробнее об игре</span>
         </button>
 
-        <div className="inline-flex items-center justify-between sm:justify-start gap-1 p-1 rounded-xl bg-zinc-900/90 backdrop-blur-md shadow-lg shadow-black/40">
+        <div className="inline-flex items-center justify-between sm:justify-start gap-1 p-1 rounded-xl bg-zinc-900 shadow-lg shadow-black/50">
           <button
             type="button"
             onClick={() => onUpdateStatus(game, userStatus === 'playing' ? null : 'playing')}
             className={`flex-1 sm:flex-initial justify-center px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
               userStatus === 'playing'
-                ? 'bg-emerald-500 text-zinc-950'
-                : 'text-zinc-300 hover:text-white hover:bg-white/10'
+                ? 'bg-emerald-500 text-zinc-950 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800'
             }`}
           >
             <Play className="w-3.5 h-3.5 fill-current" />
@@ -84,8 +84,8 @@ export const PS5Spotlight: React.FC<Props> = ({
             onClick={() => onUpdateStatus(game, userStatus === 'backlog' ? null : 'backlog')}
             className={`flex-1 sm:flex-initial justify-center px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
               userStatus === 'backlog'
-                ? 'bg-amber-500 text-zinc-950'
-                : 'text-zinc-300 hover:text-white hover:bg-white/10'
+                ? 'bg-amber-500 text-zinc-950 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800'
             }`}
           >
             <Clock className="w-3.5 h-3.5" />
@@ -97,8 +97,8 @@ export const PS5Spotlight: React.FC<Props> = ({
             onClick={() => onUpdateStatus(game, userStatus === 'completed' ? null : 'completed')}
             className={`flex-1 sm:flex-initial justify-center px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
               userStatus === 'completed'
-                ? 'bg-blue-500 text-zinc-950'
-                : 'text-zinc-300 hover:text-white hover:bg-white/10'
+                ? 'bg-blue-500 text-zinc-950 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800'
             }`}
           >
             <Check className="w-3.5 h-3.5" />

@@ -1,17 +1,15 @@
 import React from 'react';
-import { Flame, Zap, Star } from 'lucide-react';
 
 export interface FilterChipOption {
   id: string;
   label: string;
-  icon?: React.ReactNode;
 }
 
 const CHIPS: FilterChipOption[] = [
-  { id: 'all', label: 'Все' },
-  { id: 'masterpiece', label: 'Шедевры 90+', icon: <Flame className="w-3.5 h-3.5 text-amber-400" /> },
-  { id: 'short', label: 'До 25 часов', icon: <Zap className="w-3.5 h-3.5 text-emerald-400" /> },
-  { id: 'top_rated', label: 'Рейтинг 4.5+', icon: <Star className="w-3.5 h-3.5 text-yellow-400" /> },
+  { id: 'all', label: 'Все игры' },
+  { id: 'masterpiece', label: 'Шедевры (90+)' },
+  { id: 'short', label: 'Короткие (до 25 ч)' },
+  { id: 'top_rated', label: 'Высокий рейтинг' },
 ];
 
 interface Props {
@@ -29,14 +27,13 @@ export const FilterChips: React.FC<Props> = ({ activeChip, onSelectChip }) => {
             key={chip.id}
             type="button"
             onClick={() => onSelectChip(chip.id)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
               isActive
-                ? 'bg-white text-zinc-950 font-semibold shadow-sm'
+                ? 'bg-white text-zinc-950 shadow-sm'
                 : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300'
             }`}
           >
-            {chip.icon}
-            <span>{chip.label}</span>
+            {chip.label}
           </button>
         );
       })}

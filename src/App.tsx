@@ -295,7 +295,7 @@ function App() {
         gamepadName={gamepadName}
       />
 
-      <main className={`flex-1 flex flex-col ${effectiveViewMode === 'console' ? 'lg:justify-between' : ''} px-3 sm:px-8 max-w-[1600px] w-full mx-auto pb-4`}>
+      <main className={`flex-1 flex flex-col ${effectiveViewMode === 'console' ? 'lg:justify-between' : ''} px-3 sm:px-8 max-w-[1600px] w-full mx-auto pb-14`}>
         {showFavoritesOnly ? (
           <div className="py-4 sm:py-6 animate-fadeIn">
             <LibraryDashboard
@@ -352,14 +352,14 @@ function App() {
             )}
 
             <div className="flex items-center justify-between gap-2 sm:gap-3 pt-3 sm:pt-6 pb-2">
-              <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1 flex-1">
+              <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar py-1 flex-1">
                 <button
                   type="button"
                   onClick={() => {
                     sounds.playNav();
                     setGameQuery((prev) => ({ ...prev, genreId: null }));
                   }}
-                  className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                     gameQuery.genreId === null
                       ? 'bg-white text-zinc-950 font-bold shadow-sm'
                       : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 shadow-sm'
@@ -379,7 +379,7 @@ function App() {
                         genreId: prev.genreId === genre.id ? null : genre.id,
                       }));
                     }}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                       gameQuery.genreId === genre.id
                         ? 'bg-white text-zinc-950 font-bold shadow-sm'
                         : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 shadow-sm'
@@ -398,6 +398,27 @@ function App() {
                     setGameQuery((prev) => ({ ...prev, filterChip: chipId }));
                   }}
                 />
+
+                <div className="h-4 w-px bg-zinc-800 shrink-0" />
+
+                <select
+                  value={gameQuery.sortOrder || ''}
+                  onChange={(e) => {
+                    sounds.playNav();
+                    setGameQuery((prev) => ({
+                      ...prev,
+                      sortOrder: e.target.value || undefined,
+                    }));
+                  }}
+                  className="bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-semibold px-2.5 py-1.5 rounded-lg outline-none cursor-pointer transition-colors shadow-sm shrink-0"
+                  title="Сортировка каталога"
+                >
+                  <option value="">Сортировка: По умолчанию</option>
+                  <option value="-metacritic">Metacritic (по убыванию)</option>
+                  <option value="-rating">Рейтинг RAWG (по убыванию)</option>
+                  <option value="-released">Дата выхода (новые)</option>
+                  <option value="name">По названию (А–Я)</option>
+                </select>
               </div>
 
               <div className="hidden lg:flex items-center gap-1 bg-zinc-900/90 backdrop-blur-md p-1 rounded-xl shadow-inner shrink-0">
@@ -504,22 +525,35 @@ function App() {
         onKeySaved={() => setReloadCounter((c) => c + 1)}
       />
 
-      {isGamepadConnected && (
-        <div className="fixed bottom-4 right-4 z-40 hidden md:flex items-center gap-3 px-4 py-2 rounded-full bg-zinc-900/95 backdrop-blur-md text-xs text-zinc-300 shadow-2xl shadow-black/80 animate-fadeIn select-none">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-semibold text-white">{gamepadName || 'Контроллер'}</span>
-          </div>
-          <div className="h-3 w-px bg-zinc-800" />
-          <div className="flex items-center gap-2.5 text-[11px] font-mono text-zinc-400">
-            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-white font-sans font-semibold">◀ ▶</kbd> Выбор</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-emerald-300 font-sans font-semibold">A / ✕</kbd> Открыть</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-rose-300 font-sans font-semibold">B / ○</kbd> Назад</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-sky-300 font-sans font-semibold">X / □</kbd> Статус</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-amber-300 font-sans font-semibold">Y / △</kbd> Рулетка</span>
-          </div>
+      <footer className="hidden md:flex fixed bottom-0 inset-x-0 h-9 bg-zinc-950/95 z-30 px-4 sm:px-8 items-center justify-between text-xs text-zinc-400 select-none border-t border-zinc-900">
+        <div className="flex items-center gap-2">
+          {isGamepadConnected ? (
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-semibold text-zinc-200">{gamepadName || 'Контроллер'}</span>
+            </div>
+          ) : (
+            <span className="text-[11px] text-zinc-500 font-medium">GameVault PS5 Experience</span>
+          )}
         </div>
-      )}
+
+        <div className="flex items-center gap-4 text-[11px] font-medium text-zinc-400">
+          {isGamepadConnected ? (
+            <>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-300 font-bold">◀ ▶</kbd> Навигация</span>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-emerald-400 font-bold">✕</kbd> Выбрать</span>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-rose-400 font-bold">○</kbd> Назад</span>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-sky-400 font-bold">□</kbd> Статус</span>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-amber-400 font-bold">△</kbd> Случайная</span>
+            </>
+          ) : (
+            <>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-300 font-mono text-[10px]">/</kbd> Поиск</span>
+              <span className="flex items-center gap-1.5"><kbd className="px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-300 font-mono text-[10px]">Esc</kbd> Закрыть</span>
+            </>
+          )}
+        </div>
+      </footer>
 
       <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
     </div>

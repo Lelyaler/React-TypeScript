@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, Dices, Bookmark, Gamepad2, Settings, Volume2, VolumeX } from 'lucide-react';
+import { Search, X, Shuffle, Bookmark, Gamepad2, Settings, Volume2, VolumeX } from 'lucide-react';
 import { sounds } from '../utils/soundEffects';
 
 interface Props {
@@ -70,7 +70,7 @@ export const PS5Header: React.FC<Props> = ({
           }}
           className="flex items-center gap-2.5 cursor-pointer group shrink-0"
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black flex items-center justify-center backdrop-blur-md transition-all">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all">
             <Gamepad2 className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <span className="font-extrabold text-lg tracking-tight text-white hidden sm:inline">
@@ -85,10 +85,10 @@ export const PS5Header: React.FC<Props> = ({
               sounds.playSelect();
               onSelectTab('catalog');
             }}
-            className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
               activeTab === 'catalog'
                 ? 'bg-white text-zinc-950 shadow-md'
-                : 'text-zinc-400 hover:text-white hover:bg-white/10'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
             }`}
           >
             Игры
@@ -100,16 +100,16 @@ export const PS5Header: React.FC<Props> = ({
               sounds.playSelect();
               onSelectTab('library');
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
               activeTab === 'library'
                 ? 'bg-white text-zinc-950 shadow-md'
-                : 'text-zinc-400 hover:text-white hover:bg-white/10'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
             }`}
           >
             <Bookmark className="w-3.5 h-3.5" />
             <span>Библиотека</span>
             {libraryCount > 0 && (
-              <span className="text-[10px] sm:text-[11px] px-1.5 py-0.2 rounded-full bg-zinc-800 text-zinc-300">
+              <span className="text-[10px] sm:text-[11px] px-1.5 py-0.2 rounded-md bg-zinc-800 text-zinc-300 font-bold">
                 {libraryCount}
               </span>
             )}
@@ -121,11 +121,11 @@ export const PS5Header: React.FC<Props> = ({
               sounds.playSelect();
               onOpenRoulette();
             }}
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-amber-300 hover:text-white hover:bg-white/10 transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all"
             title="Случайная игра"
           >
-            <Dices className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden md:inline">Рулетка</span>
+            <Shuffle className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="hidden md:inline">Случайная</span>
           </button>
         </nav>
       </div>
@@ -133,7 +133,7 @@ export const PS5Header: React.FC<Props> = ({
       <div className="flex items-center gap-1 sm:gap-3">
         {isGamepadConnected && (
           <div
-            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/70 text-emerald-300 text-xs font-medium tracking-tight shadow-sm animate-fadeIn"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/70 text-emerald-300 text-xs font-medium tracking-tight shadow-sm animate-fadeIn"
             title={`Контроллер активен: ${gamepadName || 'Геймпад'}`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -150,7 +150,7 @@ export const PS5Header: React.FC<Props> = ({
             value={searchText}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Поиск..."
-            className="w-28 focus:w-40 sm:w-64 sm:focus:w-64 bg-zinc-900/90 hover:bg-zinc-800/90 focus:bg-zinc-900 text-xs sm:text-sm text-white placeholder-zinc-400 rounded-full pl-8 sm:pl-9 pr-7 sm:pr-8 py-1.5 shadow-inner transition-all duration-200 outline-none focus:ring-1 focus:ring-white/20"
+            className="w-28 focus:w-40 sm:w-64 sm:focus:w-64 bg-zinc-900/90 hover:bg-zinc-800/90 focus:bg-zinc-900 text-xs sm:text-sm text-white placeholder-zinc-400 rounded-xl pl-8 sm:pl-9 pr-7 sm:pr-8 py-1.5 shadow-inner transition-all duration-200 outline-none focus:ring-1 focus:ring-white/20"
           />
           {searchText && (
             <button

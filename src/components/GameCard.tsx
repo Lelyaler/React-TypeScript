@@ -99,10 +99,10 @@ export const GameCard: React.FC<Props> = ({
               e.stopPropagation();
               setShowStatusMenu((prev) => !prev);
             }}
-            className={`p-1.5 rounded-lg backdrop-blur-md transition-all duration-200 ${
+            className={`p-1.5 rounded-lg transition-all duration-200 shadow-md ${
               userStatus
-                ? 'bg-white text-zinc-950 shadow-sm opacity-100'
-                : 'bg-black/60 text-white/80 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-white hover:text-zinc-950'
+                ? 'bg-white text-zinc-950 opacity-100'
+                : 'bg-zinc-900/90 text-white/80 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-white hover:text-zinc-950'
             }`}
             title="Статус в библиотеке"
           >
