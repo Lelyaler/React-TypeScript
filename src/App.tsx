@@ -47,6 +47,14 @@ function App() {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(() => sounds.getEnabled());
   const [reloadCounter, setReloadCounter] = useState<number>(0);
   const [userPcSpecs, setUserPcSpecs] = useState<UserPcSpecs>(() => getStoredPcSpecs());
+  const [filterKey, setFilterKey] = useState<string>(() => `${gameQuery}_${showFavoritesOnly}_${activeBacklogTab}`);
+  const [visibleCount, setVisibleCount] = useState<number>(12);
+
+  const currentFilterKey = `${gameQuery}_${showFavoritesOnly}_${activeBacklogTab}`;
+  if (currentFilterKey !== filterKey) {
+    setFilterKey(currentFilterKey);
+    setVisibleCount(12);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -497,19 +505,32 @@ function App() {
                     ))}
                   </div>
                 ) : displayedGames.length > 0 ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4.5">
-                    {displayedGames.map((game, idx) => (
-                      <GameCard
-                        key={game.id}
-                        game={game}
-                        priority={idx === 0}
-                        userStatus={getStatus(game.id)}
-                        userPcSpecs={userPcSpecs}
-                        onUpdateStatus={handleUpdateGameStatus}
-                        onSelectGame={handleSelectGame}
-                      />
-                    ))}
-                  </div>
+                  <>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4.5">
+                      {displayedGames.slice(0, visibleCount).map((game, idx) => (
+                        <GameCard
+                          key={game.id}
+                          game={game}
+                          priority={idx === 0}
+                          userStatus={getStatus(game.id)}
+                          userPcSpecs={userPcSpecs}
+                          onUpdateStatus={handleUpdateGameStatus}
+                          onSelectGame={handleSelectGame}
+                        />
+                      ))}
+                    </div>
+                    {displayedGames.length > visibleCount && (
+                      <div className="mt-8 flex justify-center">
+                        <button
+                          type="button"
+                          onClick={() => setVisibleCount((prev) => prev + 12)}
+                          className="px-6 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-semibold shadow-sm transition-all border border-white/10 hover:border-white/20 active:scale-98 cursor-pointer"
+                        >
+                          Показать ещё ({displayedGames.length - visibleCount})
+                        </button>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="py-16 sm:py-20 text-center text-zinc-400 text-xs sm:text-sm">
                     Игры не найдены. Попробуйте изменить фильтры.

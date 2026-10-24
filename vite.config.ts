@@ -6,6 +6,8 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/React-TypeScript/' : '/',
   plugins: [react(), tailwindcss()],
   build: {
+    target: 'es2022',
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks(id) {
