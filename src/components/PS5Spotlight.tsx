@@ -1,0 +1,149 @@
+import React from 'react';
+import type { Game, BacklogStatus } from '../types/game';
+import type { UserPcSpecs } from '../types/pcSpecs';
+import { evaluatePcCompatibility } from '../utils/pcCompatibility';
+import { PlatformIcons } from './PlatformIcons';
+import { CriticScore } from './CriticScore';
+import { sounds } from '../utils/soundEffects';
+
+interface Props {
+  game: Game;
+  userStatus?: BacklogStatus | null;
+  onOpenDetails: (game: Game) => void;
+  onUpdateStatus: (game: Game, status: BacklogStatus | null) => void;
+  onOpenCompare?: (game: Game) => void;
+  userPcSpecs?: UserPcSpecs;
+  onOpenPcSpecs?: () => void;
+}
+
+export const PS5Spotlight: React.FC<Props> = ({
+  game,
+  userStatus,
+  onOpenDetails,
+  onUpdateStatus,
+  onOpenCompare,
+  userPcSpecs,
+  onOpenPcSpecs,
+}) => {
+  const releaseYear = game.released ? new Date(game.released).getFullYear() : null;
+  const pcResult = userPcSpecs ? evaluatePcCompatibility(game, userPcSpecs) : null;
+
+  return (
+    <div className="pt-4 sm:pt-14 pb-4 sm:pb-10 max-w-3xl animate-fadeIn">
+      <div className="flex items-center gap-2 sm:gap-3 mb-2.5 sm:mb-3 flex-wrap">
+        <PlatformIcons platforms={game.parent_platforms} />
+        <CriticScore score={game.metacritic} />
+
+        {pcResult && (
+          <button
+            type="button"
+            onClick={onOpenPcSpecs}
+            className={`inline-flex items-center text-[11px] font-bold px-2.5 py-0.5 rounded-md transition-all hover:scale-103 active:scale-95 shadow-sm ${pcResult.bgClass} ${pcResult.textClass}`}
+            title={`Совместимость: ${pcResult.summary} (нажмите для настройки профиля оборудования)`}
+          >
+            {pcResult.badgeText}
+          </button>
+        )}
+
+        {game.rating > 0 && (
+          <span className="inline-flex items-center text-xs font-semibold text-amber-400 bg-zinc-900 px-2 py-0.5 rounded-md shadow-sm">
+            ★ {game.rating.toFixed(1)}
+          </span>
+        )}
+
+        {releaseYear && (
+          <span className="text-xs text-zinc-400 font-medium">
+            {releaseYear}
+          </span>
+        )}
+
+        {game.playtime > 0 && (
+          <span className="text-xs text-zinc-400 font-medium">
+            ~{game.playtime} ч.
+          </span>
+        )}
+
+        {game.genres && game.genres.length > 0 && (
+          <div className="hidden sm:flex items-center gap-1.5 ml-1">
+            {game.genres.slice(0, 2).map((g) => (
+              <span
+                key={g.id}
+                className="text-[11px] font-medium text-zinc-300 bg-white/[0.07] px-2 py-0.5 rounded-md"
+              >
+                {g.name}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <h1 className="text-2xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight sm:leading-none drop-shadow-md">
+        {game.name}
+      </h1>
+
+      <p className="text-xs sm:text-sm md:text-base text-zinc-300/90 mt-2.5 sm:mt-4 leading-relaxed line-clamp-2 sm:line-clamp-3 font-normal max-w-2xl drop-shadow">
+        {game.description_raw ||
+          (game.genres?.length ? `${game.name} — игра в жанре ${game.genres.map((g) => g.name).join(', ')}.` : game.name)}
+      </p>
+
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 mt-4 sm:mt-6">
+        <button
+          type="button"
+          onClick={() => onOpenDetails(game)}
+          className="inline-flex items-center justify-center px-5 py-2.5 sm:py-3 rounded-xl bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-200 transition-all hover:scale-103 shadow-lg shadow-white/10 active:scale-95"
+        >
+          Об игре
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            sounds.playSelect();
+            onOpenCompare?.(game);
+          }}
+          className="inline-flex items-center justify-center px-4 py-2.5 sm:py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 font-bold text-xs sm:text-sm transition-all shadow-md active:scale-95"
+        >
+          Сравнить
+        </button>
+
+        <div className="inline-flex items-center justify-between sm:justify-start gap-1 p-1 rounded-xl bg-zinc-900 shadow-lg shadow-black/50">
+          <button
+            type="button"
+            onClick={() => onUpdateStatus(game, userStatus === 'playing' ? null : 'playing')}
+            className={`flex-1 sm:flex-initial justify-center px-3.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+              userStatus === 'playing'
+                ? 'bg-emerald-500 text-zinc-950 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800'
+            }`}
+          >
+            {userStatus === 'playing' ? 'Играю' : 'Играть'}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onUpdateStatus(game, userStatus === 'backlog' ? null : 'backlog')}
+            className={`flex-1 sm:flex-initial justify-center px-3.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+              userStatus === 'backlog'
+                ? 'bg-amber-500 text-zinc-950 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800'
+            }`}
+          >
+            В планы
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onUpdateStatus(game, userStatus === 'completed' ? null : 'completed')}
+            className={`flex-1 sm:flex-initial justify-center px-3.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+              userStatus === 'completed'
+                ? 'bg-blue-500 text-zinc-950 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800'
+            }`}
+          >
+            Пройдено
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
